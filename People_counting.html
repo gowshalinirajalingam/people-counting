@@ -1,0 +1,52 @@
+<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ext-language_tools.js"></script>-->
+<script type="text/javascript">
+    RED.nodes.registerType('People_counting', {
+        category: 'Quick AI',
+        subcategory: 'People_counting',
+        color: "#ffff00",
+        defaults: {
+            name: {value: ""},
+            //this is test stuff take out later
+            //i_filename: {value: ""},
+            //save_model_path: {value: ""},
+            //number_of_recommendations:{value: ""},
+            func: {value: "\nreturn msg"},
+            outputs: {value: 1}  // Ofuscated way to persist the number of outputs of the node
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "node-red.png",
+        label: function () {
+            return this.name || "People-Counting";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="People_counting">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+
+
+</script>
+
+
+<script type="text/x-red" data-help-name="People_counting">
+    <p>This node runs People_counting engine (collaborative filtering) </p>
+    <h3>Parameters</h3>
+    <dl class="message-properties">
+        <dt>Name<span class="property-type">string</span></dt>
+        <dd>Name of the node (Optional)</dd>
+        
+    </dl>
+    <h3>Output</h3>
+    <dl class="message-properties">
+        <dt>Gender-detection<span class="property-type">String</span></dt>
+        <dd>Provides Gender-detection for the video in JSON</dd>
+    </dl>
+    <h3>Help</h3>
+    <p><a href="">Need to make one for this node</a></p>
+
+</script>

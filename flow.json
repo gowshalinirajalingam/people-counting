@@ -1,0 +1,1 @@
+[{"id":"6f92864b.bf41d8","type":"inject","z":"5754e4d3.bbfdfc","name":"","topic":"","payload":"{\"video_type\":\"mp4\",\"video_link\":\"\",\"friendly_name\":\"air4_Trim\",\"file_original_name\":\"air4_Trim\"}","payloadType":"json","repeat":"","crontab":"","once":false,"onceDelay":0.1,"x":300,"y":240,"wires":[["bb71b63a.e78b98"]]}]

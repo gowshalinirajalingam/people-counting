@@ -1,0 +1,20 @@
+#!/bin/bash
+
+version=$(mysql -V)
+#if [ -z "$version" ]; then
+    echo "result $version"
+    echo "Sudo Updating"
+    sudo apt update
+    echo "Installing mariadb server"
+    export DEBIAN_FRONTEND="noninteractive"
+    sudo debconf-set-selections <<< "mariadb-server mysql-server/root_password password root"
+    sudo debconf-set-selections <<< "mariadb-server mysql-server/root_password_again password root" 
+    sudo apt-get install -y mariadb-server
+    echo "Granting privileges"
+    sudo service mysql start
+    sudo mysql -uroot --password=root -e "CREATE DATABASE PEOPLE_COUNT;"
+    sudo mysql -uroot --password=root -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost'  IDENTIFIED BY 'root';"
+    sudo mysql -uroot --password=root -e "CREATE TABLE PEOPLE_COUNT.Tenant(id int(11) NOT NULL AUTO_INCREMENT, name varchar(45) DEFAULT NULL, address varchar(256) DEFAULT NULL, PRIMARY KEY (id));"
+    sudo mysql -uroot --password=root -e "CREATE TABLE PEOPLE_COUNT.People(id int(11) NOT NULL AUTO_INCREMENT, type varchar(45) DEFAULT NULL, video_link varchar(512) DEFAULT NULL, video_friendly_name varchar(512) DEFAULT NULL, file_original_name varchar(512) DEFAULT NULL, building varchar(45) DEFAULT NULL, asset_status varchar(256) DEFAULT NULL, thumbnail_path varchar(512) DEFAULT NULL, tenant_id int(11) DEFAULT NULL, PRIMARY KEY (id), KEY tenant_id_idx (tenant_id), CONSTRAINT tenant_id FOREIGN KEY (tenant_id) REFERENCES Tenant(id));"
+    sudo mysql -uroot --password=root -e "CREATE TABLE PEOPLE_COUNT.PeopleDetails(id int NOT NULL AUTO_INCREMENT, detection_status varchar(512) DEFAULT NULL, datetime varchar(45) DEFAULT NULL, snapshot varchar(512) DEFAULT NULL, total_people_count int NOT NULL, track_id varchar(256) DEFAULT NULL, people_id int DEFAULT NULL, PRIMARY KEY (id), KEY people_id_idx (people_id), CONSTRAINT people_id FOREIGN KEY (people_id) REFERENCES People (id));"
+#fi
